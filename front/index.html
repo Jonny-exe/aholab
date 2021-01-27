@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <script src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.regions.js"></script>
+    <title>Aholab</title>
+</head>
+
+<body>
+    <title> Aholab </title>
+    <div id="inputWrapper">
+        <input type="text" placeholder="Name">
+        <input type="text" placeholder="Sirname">
+        <input type="text" placeholder="Something else">
+        <button> Continue </button>
+    </div>
+    <div id="waveformWrapper">
+        <div id="waveform"></div>
+    </div>
+    <div class="questions hide">
+        <select name="Choose">
+            <option value="kaixo"> Kaixo </option>
+            <option value="agur"> Agur </option>
+        </select>
+    </div>
+    <div id="nextInputsWrapper">
+        <button class="nextInput hide" id="playButton"> Play audio </button>
+        <button class="nextInput waiting hide" id="nextButton"> Next </button>
+        <button class="nextInput" id="startButton"> Start </button>
+    </div>
+</body>
+<script src="index.js" type="module">
+</script>
+
+</html>

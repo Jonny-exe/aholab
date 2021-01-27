@@ -1,0 +1,1 @@
+- Make it say if your browser isnt compatible
