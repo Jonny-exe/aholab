@@ -1,4 +1,5 @@
 let wavesurfer
+let userInfo
 const questions = [{
     text: "hi",
     answer1: { text: "answer1", value: 0 },
@@ -91,5 +92,8 @@ const createWaves = () => {
     return localWavesurfer
 }
 
+const init= () => {
+    $("#startButton").addEventListener("click", start)
+}
 
-$("#startButton").addEventListener("click", start)
+init()

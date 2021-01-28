@@ -10,10 +10,34 @@
 
 <body>
     <div id="inputWrapper">
-        <input type="text" placeholder="Name">
-        <input type="text" placeholder="Sirname">
-        <input type="text" placeholder="Something else">
-        <button id="continueButton"> Continue </button>
+        <p>
+            Nombre y appelido:
+            <input class="userInfoInput" type="text" placeholder="Nombre y appelido">
+        </p>
+        <p>
+            Experiencia en tecnologías del habla:
+            <select class="userInfoInput">
+                <option value="5">Experto</option>
+                <option value="4">Usuario habitual</option>
+                <option value="3">Usuario esporádico</option>
+                <option value="2">Usuario esporádico</option>
+                <option value="1">La adquirida en otros tests</option>
+                <option value="0">Ninguna</option>
+            </select>
+        </p>
+        <p>
+            Equipo de audio que va a utilizar: 
+            <select class="userInfoInput">
+                <option value="4">Auriculares buenos</option>
+                <option value="3">Auriculares normales</option>
+                <option value="2">Altavoces buenos</option>
+                <option value="1">Altavoces normales</option>
+                <option value="0">Equipo malo</option>
+            </select>
+        </p>
+        <p><i>(Los datos aquí introducidos nos ayudarán a interpretar los resultados y no serán usados para nada más)</i></p>
+        <hr>
+        <button id="continueButton"> Continuar </button>
     </div>
 </body>
 <script src="login.js" type="module"></script>

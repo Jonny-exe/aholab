@@ -2,11 +2,11 @@ body {
 	text-align: center;
 }
 
-#inputWrapper {
+/* #inputWrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-}
+} */
 
 input {
 	margin: 1%;
@@ -146,4 +146,8 @@ p {
 
 .questionParagraph {
 	width: 95%;
+}
+
+#inputWrapper {
+	text-align: left;
 }

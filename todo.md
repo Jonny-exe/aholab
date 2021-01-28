@@ -1,2 +1,3 @@
 - Make it say if your browser isnt compatible
 - Give html from db or change it dynamicly with the risk of the user changing HTML
+- Insetead of saving infor temporaly in localstorage, pass it through parameters in url
