@@ -4,33 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="style/index.css">
     <script src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.js"></script>
     <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.regions.js"></script>
-    <title>Aholab</title>
+    <title> Aholab </title>
 </head>
 
 <body>
     <title> Aholab </title>
-    <div id="inputWrapper">
-        <input type="text" placeholder="Name">
-        <input type="text" placeholder="Sirname">
-        <input type="text" placeholder="Something else">
-        <button> Continue </button>
+    <div id="explicationWrapper">
+        <p>
+            This is an explication of what to do while they listen to the audio
+        </p>
     </div>
-    <div id="waveformWrapper">
-        <div id="waveform"></div>
-    </div>
-    <div class="questions hide">
-        <select name="Choose">
-            <option value="kaixo"> Kaixo </option>
-            <option value="agur"> Agur </option>
-        </select>
-    </div>
-    <div id="nextInputsWrapper">
-        <button class="nextInput hide" id="playButton"> Play audio </button>
-        <button class="nextInput waiting hide" id="nextButton"> Next </button>
-        <button class="nextInput" id="startButton"> Start </button>
+    <div id="afterLogin">
+        <div id="waveformWrapper">
+            <div id="waveform"></div>
+            <div id="loaderWrapper">
+                <div id="loader"></div>
+            </div>
+        </div>
+        <div id="questionsWrapper" class="questions hide">
+            <select name="Choose">
+                <option value="kaixo"> Kaixo </option>
+                <option value="agur"> Agur </option>
+            </select>
+        </div>
+        <div id="nextInputsWrapper">
+            <button class="nextInput hide" id="playButton"> Play audio </button>
+            <button class="nextInput waiting hide" id="nextButton"> Next </button>
+            <button class="nextInput" id="startButton"> Start </button>
+        </div>
     </div>
 </body>
 <script src="index.js" type="module">

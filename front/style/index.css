@@ -1,0 +1,149 @@
+body {
+	text-align: center;
+}
+
+#inputWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+input {
+	margin: 1%;
+	width: 30%;
+}
+input[type="radio"] {
+	width: auto;
+}
+
+#waveformWrapper {
+	padding: 1%;
+	height: 80%;
+}
+
+#waveform {
+	pointer-events: none;
+	display: inherit;
+}
+
+.nextInput.waiting {
+	pointer-events: none;
+	opacity: .5;
+}
+
+select {
+	margin-top: 1%;
+}
+
+.hide {
+	display: none !important;
+}
+
+#nextInputsWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center
+}
+
+button {
+	width: 20%;
+}
+
+button.nextInput {
+	margin-top: 1%;
+	text-align: center;
+}
+
+#explicationWrapper {
+	background-color: violet;
+	padding: 1%;
+	margin: 1%;
+	border-radius: 5px;
+}
+
+/* Safari */
+
+@-webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+#loader {
+	border: 16px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 16px solid #3498db;
+	width: 100px;
+	height: 100px;
+	display: none;
+	transform: translateY(0%);
+}
+
+.activeLoader {
+	-webkit-animation: spin 2s linear infinite;
+	display: inherit !important;
+	/* Safari */
+	animation: spin 2s linear infinite;
+	transform: translateY(-10%);
+}
+
+#loaderWrapper {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.questionText {
+	background-color: violet;
+	padding: 1%;
+	margin: 1%;
+	border-radius: 5px;
+}
+
+#questionsWrapper {
+	text-align: left;
+}
+
+/* The container
+
+.container {
+	margin: 1%;
+	display: block;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 12px;
+	cursor: pointer;
+	/* font-size: 22px; */
+	/* -webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	--optionSize: 15px;
+} */
+
+.radioButtonWrapper {
+	margin: 1%;
+	display: flex;
+	justify-content: space-between;
+}
+
+p {
+	word-wrap: break-word;
+}
+
+.questionParagraph {
+	width: 95%;
+}
