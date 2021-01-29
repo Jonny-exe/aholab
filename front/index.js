@@ -53,11 +53,13 @@ const createQuestions = () => {
     console.log(question)
     let finalHTML = `<p class="questionText"> ${question["text"]} </p>`
     let innerHTML = ""
+    let i = 0
     for (let answer in question) {
-        console.log(answer)
+        console.log("answer", answer)
         if (answer == "text") continue
         innerHTML +=
-            `<div class="radioButtonWrapper"> <p class="questionParagraph">${question[answer]["text"]}</p> <input type="radio" checked="checked" name="radio"><span class="checkmark"></span></div>`
+            `<div class="radioButtonWrapper"> <p class="questionParagraph">${question[answer]["text"]}</p> <input type="radio" class="question" checked="checked" value="${i}" name="radio"><span class="checkmark"></span></div>`
+        i++
     }
     finalHTML = finalHTML + innerHTML
     $("#questionsWrapper").innerHTML = finalHTML
@@ -73,7 +75,22 @@ const nextQuestion = () => {
     $("div.questions").classList.add("hide")
     $("#nextButton").classList.add("waiting")
     $("#playButton").classList.remove("hide")
+    const answer = getAnswer()
+    console.log(answer)
     renderQuestion()
+}
+
+const getAnswer = () => {
+    const answers = document.querySelectorAll("input.question")
+    let value
+    for (let answerIndex in answers) {
+        const answer = answers[answerIndex]
+        if (answer.checked) {
+            value = answer.value
+            break
+        }
+    }
+    return value
 }
 
 let fileIndex = 0
@@ -92,8 +109,22 @@ const createWaves = () => {
     return localWavesurfer
 }
 
-const init= () => {
+const init = () => {
+    const getUserInfo = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+        const experience = urlParams.get('experience')
+        const equip = urlParams.get('equip')
+        const userInfo = {
+            name: name,
+            experience: experience,
+            equip: equip
+        }
+        return userInfo
+    }
+    const userInfo = getUserInfo()
     $("#startButton").addEventListener("click", start)
 }
+
 
 init()

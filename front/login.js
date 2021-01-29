@@ -4,20 +4,19 @@ const $ = (item) => {
 
 const continueTest = () => {
     const createUserInfo = () => {
-        let userInfo = [] 
+        let userInfo = []
         const inputs = document.getElementsByClassName("userInfoInput")
         for (let i = 0; i < inputs.length; i++) {
             userInfo.push(inputs[i].value)
         }
         console.log(userInfo)
-        return userInfo
+        return `name=${userInfo[0]}&experience=${userInfo[1]}&equip=${userInfo[2]}`
     }
-    const userInfo = JSON.stringify(createUserInfo())
-    localStorage.setItem("userInfo", userInfo)
-    redirect()
+    let params = createUserInfo()
+    redirect(params)
 }
-const redirect = () => {
-    window.location.href = "./"
+const redirect = (params) => {
+    window.location.href = "./?" + params
 }
 
 $("#continueButton").addEventListener('click', continueTest)
