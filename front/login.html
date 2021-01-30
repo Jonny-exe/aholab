@@ -9,6 +9,9 @@
 </head>
 
 <body>
+    <div id="header">
+        <b> Aholab </b>
+    </div>
     <div id="inputWrapper">
         <p>
             Nombre y appelido:
@@ -26,7 +29,7 @@
             </select>
         </p>
         <p>
-            Equipo de audio que va a utilizar: 
+            Equipo de audio que va a utilizar:
             <select class="userInfoInput">
                 <option value="4">Auriculares buenos</option>
                 <option value="3">Auriculares normales</option>
@@ -35,9 +38,13 @@
                 <option value="0">Equipo malo</option>
             </select>
         </p>
-        <p><i>(Los datos aquí introducidos nos ayudarán a interpretar los resultados y no serán usados para nada más)</i></p>
+        <p><i>(Los datos aquí introducidos nos ayudarán a interpretar los resultados y no serán usados para nada
+                más)</i></p>
         <hr>
         <button id="continueButton"> Continuar </button>
+        <div class="hide alert" id="alertWrapper">
+            Asergurate de rellenar todas las casillas
+        </div>
     </div>
 </body>
 <script src="js/login.js" type="module"></script>
