@@ -1,5 +1,10 @@
 export const q = [{
-    text: "hi",
+    text: "ssssssssssssssssssssssssssssssssssssssssssssssssssssssss asñlkj añsdlkfja ñlkajsdf ñlkajsdf",
+    answer1: { text: "answer1", value: 0 },
+    answer2: { text: "answer2", value: 0 },
+    answer3: { text: "answer3", value: 1 }
+}, {
+    text: "ssssssssssssssssssssssssssssssssssssssssssssssssssssssss asñlkj añsdlkfja ñlkajsdf ñlkajsdf",
     answer1: { text: "answer1", value: 0 },
     answer2: { text: "answer2", value: 0 },
     answer3: { text: "answer3", value: 1 }

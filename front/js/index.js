@@ -48,7 +48,7 @@ const renderQuestion = () => {
 
 const createQuestions = () => {
     const question = questions[fileIndex - 1]
-    let finalHTML = `<p class="questionText"> ${question["text"]} </p>`
+    let finalHTML = `<p class="questionText"> ${question["text"]} ${fileIndex} / ${audioFilesAmount} </p>`
     let innerHTML = ""
     let i = 0
     for (let answer in question) {
@@ -120,8 +120,8 @@ const createWaves = () => {
     }
     var localWavesurfer = WaveSurfer.create({
         container: '#waveform',
-        waveColor: 'violet',
-        progressColor: 'purple'
+        waveColor: '#005599',
+        progressColor: '#7FC5FF'
     });
     localWavesurfer.load(`./audios/${fileIndex}.mp3`);
     fileIndex++

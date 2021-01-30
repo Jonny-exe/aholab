@@ -69,11 +69,11 @@ func GetAudioFileAmount(w http.ResponseWriter, r *http.Request) {
 	for {
 		fileName := strconv.Itoa(fileIndex)
 		_, err := os.Stat(audioFilesDir + fileName + ".mp3")
-		fileIndex++
 		if os.IsNotExist(err) {
 			// File does not exist
 			break
 		}
+		fileIndex++
 	}
 	json.NewEncoder(w).Encode(fileIndex)
 }
