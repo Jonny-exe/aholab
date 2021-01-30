@@ -10,6 +10,12 @@ import (
 	"strconv"
 )
 
+// Test ..
+func Test(w http.ResponseWriter, r *http.Request) {
+	log.Println("TESTSETSETSTESTES")
+	json.NewEncoder(w).Encode("HEllo")
+}
+
 // InsertUserInfo inserts users to excel
 func InsertUserInfo(w http.ResponseWriter, r *http.Request) {
 	type reqtype struct {
@@ -47,7 +53,7 @@ func writeToFile(values []string) {
 	var records [][]string
 	if fileSize.Size() == 0 {
 		log.Println("File empty")
-		columnNames := []string{"hi", "test", "hi"}
+		columnNames := []string{"name", "experience", "equip", "answer1", "answer2"}
 		records = append(records, columnNames)
 	}
 	records = append(records, values)
@@ -68,7 +74,7 @@ func GetAudioFileAmount(w http.ResponseWriter, r *http.Request) {
 	audioFilesDir := os.Getenv("AHOLAB_AUDIO_FILES_DIR")
 	for {
 		fileName := strconv.Itoa(fileIndex)
-		_, err := os.Stat(audioFilesDir + fileName + ".mp3")
+		_, err := os.Stat(audioFilesDir + fileName + ".wav")
 		if os.IsNotExist(err) {
 			// File does not exist
 			break

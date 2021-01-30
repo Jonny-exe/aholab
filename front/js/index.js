@@ -123,7 +123,7 @@ const createWaves = () => {
         waveColor: '#005599',
         progressColor: '#7FC5FF'
     });
-    localWavesurfer.load(`./audios/${fileIndex}.mp3`);
+    localWavesurfer.load(`./audios/${fileIndex}.wav`);
     fileIndex++
     return localWavesurfer
 }
@@ -146,16 +146,17 @@ const getUserInfo = () => {
             }
             userInfoList.push(inputs[i].value)
         }
+
+        userInfo = {
+            name: userInfoList[0],
+            experience: userInfoList[1],
+            equip: userInfoList[2]
+        }
         return true
     }
     const continueLogin = () => {
         $("#loginWrapper").classList.add("hide")
         $("#testWrapper").classList.remove("hide")
-    }
-    userInfo = {
-        name: userInfoList[0],
-        experience: userInfoList[1],
-        equip: userInfoList[2]
     }
     let valid = getInfo()
     if (!valid) return

@@ -22,11 +22,11 @@ func handleRequest() error {
 	myRouter := mux.NewRouter().StrictSlash(true)
 	myRouter.HandleFunc("/InsertUserInfo", handlers.InsertUserInfo).Methods("POST", "OPTIONS")
 	myRouter.HandleFunc("/GetAudioFileAmount", handlers.GetAudioFileAmount).Methods("GET", "OPTIONS")
+	myRouter.HandleFunc("/", handlers.Test).Methods("GET", "OPTIONS")
 	acceptedOrigins := os.Getenv("AHOLAB_ACCEPTED_ORIGINS")
 	log.Println(acceptedOrigins)
 	c := cors.New(cors.Options{
-		AllowedOrigins: []string{acceptedOrigins},
-		//AllowedOrigins:   []string{"http://localhost:3000", "http://jonny.sytes.net", "http://192.168.0.19"},
+		AllowedOrigins:   []string{acceptedOrigins},
 		AllowCredentials: false,
 		AllowedMethods:   []string{"POST", "GET", "OPTIONS"},
 		AllowedHeaders:   []string{"*"},
@@ -36,7 +36,7 @@ func handleRequest() error {
 		Debug: false,
 	})
 
-	PORT := 5000
+	PORT := 8080
 	corsHandler := c.Handler(myRouter)
 	log.Println("Listening on port: ", PORT)
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(PORT), corsHandler))
