@@ -128,33 +128,45 @@ const createWaves = () => {
     return localWavesurfer
 }
 
-const init = async () => {
-    const getUserInfo = () => {
-        const paramsList = ["name", "experience", "equip"]
-        const urlParams = new URLSearchParams(window.location.search);
-        for (let paramIndex in paramsList) {
-            const param = paramsList[paramIndex]
-            userInfo[param] = urlParams.get(param)
+// LOGIN 
+const showAlert = () => {
+    $("#alertWrapper").classList.remove("hide")
+    $("#alertWrapper").classList.add("show")
+}
+
+const getUserInfo = () => {
+    let userInfoList = []
+    const getInfo = () => {
+        const infoList = ["name", "experience", "equip"]
+        const inputs = document.getElementsByClassName("userInfoInput")
+        for (let i = 0; i < inputs.length; i++) {
+            if (inputs[i].value == null || inputs[i].value == undefined || inputs[i].value == "") {
+                showAlert()
+                return false
+            }
+            userInfoList.push(inputs[i].value)
         }
-        const name = urlParams.get('name');
-        const experience = urlParams.get('experience')
-        const equip = urlParams.get('equip')
-        return {
-            name: name,
-            experience: experience,
-            equip: equip
-        }
+        return true
     }
-    userInfo = getUserInfo()
+    const continueLogin = () => {
+        $("#loginWrapper").classList.add("hide")
+        $("#testWrapper").classList.remove("hide")
+    }
+    userInfo = {
+        name: userInfoList[0],
+        experience: userInfoList[1],
+        equip: userInfoList[2]
+    }
+    let valid = getInfo()
+    if (!valid) return
+    continueLogin()
+
+}
+
+const init = async () => {
     $("#startButton").addEventListener("click", start)
     audioFilesAmount = await db.getAudioFileAmount()
     if (audioFilesAmount == -1) showAlert()
-    console.log(audioFilesAmount)
+    $("#continueButton").addEventListener('click', getUserInfo)
 }
-
-const showAlert = () => {
-
-}
-
-
 init()
