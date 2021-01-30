@@ -19,7 +19,8 @@ func handleRequest() error {
 	// }
 
 	myRouter := mux.NewRouter().StrictSlash(true)
-	myRouter.HandleFunc("/InsertUser", handlers.InsertUserInfo).Methods("POST", "OPTIONS")
+	myRouter.HandleFunc("/InsertUserInfo", handlers.InsertUserInfo).Methods("POST", "OPTIONS")
+	myRouter.HandleFunc("/GetAudioFileAmount", handlers.GetAudioFileAmount).Methods("GET", "OPTIONS")
 
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},

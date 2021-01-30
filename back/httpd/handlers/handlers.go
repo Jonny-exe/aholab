@@ -7,12 +7,16 @@ import (
 	"net/http"
 	"os"
 	"reflect"
+	"strconv"
 )
 
 // InsertUserInfo inserts users to excel
 func InsertUserInfo(w http.ResponseWriter, r *http.Request) {
 	type reqtype struct {
-		Username string `json:"username"`
+		Name       string `json:"name"`
+		Experience string `json:"experience"`
+		Equip      string `json:"equip"`
+		Answer1    string `json:"answer1"`
 	}
 	var req reqtype
 	json.NewDecoder(r.Body).Decode(&req)
@@ -56,4 +60,20 @@ func writeToFile(values []string) {
 
 	log.Println("Written")
 	return
+}
+
+// GetAudioFileAmount ..
+func GetAudioFileAmount(w http.ResponseWriter, r *http.Request) {
+	fileIndex := 0
+	audioFilesDir := os.Getenv("AHOLAB_AUDIO_FILES_DIR")
+	for {
+		fileName := strconv.Itoa(fileIndex)
+		_, err := os.Stat(audioFilesDir + fileName + ".mp3")
+		fileIndex++
+		if os.IsNotExist(err) {
+			// File does not exist
+			break
+		}
+	}
+	json.NewEncoder(w).Encode(fileIndex)
 }

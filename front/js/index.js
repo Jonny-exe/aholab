@@ -1,11 +1,10 @@
+import * as que from './questions.js'
+import * as db from './db.js'
 let wavesurfer
-let userInfo
-const questions = [{
-    text: "hi",
-    answer1: { text: "answer1", value: 0 },
-    answer2: { text: "answer2", value: 0 },
-    answer3: { text: "answer3", value: 1 }
-}]
+let audioFilesAmount
+const questions = que.q
+let userInfo = {}
+let finalValue
 const $ = (item) => {
     return document.querySelector(item)
 }
@@ -45,12 +44,10 @@ const renderQuestion = () => {
     $("#loader").classList.add("activeLoader")
     wavesurfer.on("finish", showQuestions)
     $("#playButton").addEventListener("click", play)
-    wavesurfer = wavesurfer
 }
 
 const createQuestions = () => {
     const question = questions[fileIndex - 1]
-    console.log(question)
     let finalHTML = `<p class="questionText"> ${question["text"]} </p>`
     let innerHTML = ""
     let i = 0
@@ -72,12 +69,34 @@ const start = () => {
 }
 
 const nextQuestion = () => {
-    $("div.questions").classList.add("hide")
-    $("#nextButton").classList.add("waiting")
-    $("#playButton").classList.remove("hide")
-    const answer = getAnswer()
-    console.log(answer)
+    const changeClasses = () => {
+        $("div.questions").classList.add("hide")
+        $("#nextButton").classList.add("waiting")
+        $("#playButton").classList.remove("hide")
+    }
+    const addAnswerToUserInfo = () => {
+        const answer = getAnswer()
+        userInfo[`answer${fileIndex}`] = answer
+    }
+
+    addAnswerToUserInfo()
+
+    if (fileIndex >= audioFilesAmount - 1) {
+        showSendPage()
+        return
+    }
+
+    changeClasses()
     renderQuestion()
+}
+
+const showSendPage = () => {
+    $("#sendButton").addEventListener("click", async (event) => {
+        event.preventDefault()
+        await db.insertUserInfo(userInfo)
+    })
+    $("div.sendInfo").classList.remove("hide")
+    $("#test").classList.add("hide")
 }
 
 const getAnswer = () => {
@@ -109,21 +128,32 @@ const createWaves = () => {
     return localWavesurfer
 }
 
-const init = () => {
+const init = async () => {
     const getUserInfo = () => {
+        const paramsList = ["name", "experience", "equip"]
         const urlParams = new URLSearchParams(window.location.search);
+        for (let paramIndex in paramsList) {
+            const param = paramsList[paramIndex]
+            userInfo[param] = urlParams.get(param)
+        }
         const name = urlParams.get('name');
         const experience = urlParams.get('experience')
         const equip = urlParams.get('equip')
-        const userInfo = {
+        return {
             name: name,
             experience: experience,
             equip: equip
         }
-        return userInfo
     }
-    const userInfo = getUserInfo()
+    userInfo = getUserInfo()
     $("#startButton").addEventListener("click", start)
+    audioFilesAmount = await db.getAudioFileAmount()
+    if (audioFilesAmount == -1) showAlert()
+    console.log(audioFilesAmount)
+}
+
+const showAlert = () => {
+
 }
 
 
