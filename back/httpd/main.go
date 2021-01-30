@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/Jonny-exe/aholab/back/httpd/handlers"
@@ -21,9 +22,10 @@ func handleRequest() error {
 	myRouter := mux.NewRouter().StrictSlash(true)
 	myRouter.HandleFunc("/InsertUserInfo", handlers.InsertUserInfo).Methods("POST", "OPTIONS")
 	myRouter.HandleFunc("/GetAudioFileAmount", handlers.GetAudioFileAmount).Methods("GET", "OPTIONS")
-
+	acceptedOrigins := os.Getenv("AHOLAB_ACCEPTED_ORIGINS")
+	log.Println(acceptedOrigins)
 	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"*"},
+		AllowedOrigins: []string{acceptedOrigins},
 		//AllowedOrigins:   []string{"http://localhost:3000", "http://jonny.sytes.net", "http://192.168.0.19"},
 		AllowCredentials: false,
 		AllowedMethods:   []string{"POST", "GET", "OPTIONS"},
