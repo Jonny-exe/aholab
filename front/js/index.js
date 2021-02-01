@@ -95,6 +95,8 @@ const showSendPage = () => {
     $("#sendButton").addEventListener("click", async (event) => {
         event.preventDefault()
         await db.insertUserInfo(userInfo)
+        $("div.sendInfo").classList.add("hide")
+        $("#finalDiv").classList.remove("hide")
     })
     $("div.sendInfo").classList.remove("hide")
     $("#test").classList.add("hide")

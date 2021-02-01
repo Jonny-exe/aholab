@@ -34,7 +34,7 @@ func handleRequest() error {
 
 		// Enable Debugging for testing, consider disabling in production
 		// To debug turn this to true
-		Debug: false,
+		Debug: true,
 	})
 
 	PORT := 8080
