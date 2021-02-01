@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"net/http"
-	"os"
 	"strconv"
 
 	"github.com/Jonny-exe/aholab/back/mintzai-httpd/handlers"
@@ -23,7 +22,8 @@ func handleRequest() error {
 	myRouter.HandleFunc("/InsertUserInfo", handlers.InsertUserInfo).Methods("POST", "OPTIONS")
 	myRouter.HandleFunc("/GetAudioFileAmount", handlers.GetAudioFileAmount).Methods("GET", "OPTIONS")
 	myRouter.HandleFunc("/", handlers.Test).Methods("GET", "OPTIONS")
-	acceptedOrigins := os.Getenv("AHOLAB_ACCEPTED_ORIGINS")
+    //acceptedOrigins := os.Getenv("AHOLAB_ACCEPTED_ORIGINS")
+    acceptedOrigins := "https://aholab.ehu.eus"
 	log.Println(acceptedOrigins)
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{acceptedOrigins},
