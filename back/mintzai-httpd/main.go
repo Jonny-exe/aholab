@@ -26,7 +26,8 @@ func handleRequest() error {
     acceptedOrigins := "https://aholab.ehu.eus"
 	log.Println(acceptedOrigins)
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{acceptedOrigins},
+		//AllowedOrigins:   []string{acceptedOrigins},
+		AllowedOrigins:   []string{"*"},
 		AllowCredentials: false,
 		AllowedMethods:   []string{"POST", "GET", "OPTIONS"},
 		AllowedHeaders:   []string{"*"},
