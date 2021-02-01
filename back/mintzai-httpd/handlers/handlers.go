@@ -23,6 +23,9 @@ func InsertUserInfo(w http.ResponseWriter, r *http.Request) {
 		Experience string `json:"experience"`
 		Equip      string `json:"equip"`
 		Answer1    string `json:"answer1"`
+		Answer2    string `json:"answer2"`
+		Answer3    string `json:"answer3"`
+		Answer4    string `json:"answer4"`
 	}
 	var req reqtype
 	json.NewDecoder(r.Body).Decode(&req)

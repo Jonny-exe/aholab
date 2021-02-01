@@ -55,13 +55,14 @@ const createQuestions = () => {
         console.log("answer", answer)
         if (answer == "text") continue
         innerHTML +=
-            `<div class="radioButtonWrapper"> <p class="questionParagraph">${question[answer]["text"]}</p> <input type="radio" class="question" checked="checked" value="${i}" name="radio"><span class="checkmark"></span></div>`
+            `<div class="radioButtonWrapper">  <input type="radio" class="question" checked="checked" value="${i}" name="radio"> <p class="questionParagraph">${question[answer]["text"]}</p><span class="checkmark"></span></div>`
         i++
     }
     finalHTML = finalHTML + innerHTML
     $("#questionsWrapper").innerHTML = finalHTML
 }
 const start = () => {
+    $("#explicationWrapper").classList.add("hide")
     $("#startButton").removeEventListener("click", start)
     $("#startButton").classList.add("hide")
     $("#playButton").classList.remove("hide")

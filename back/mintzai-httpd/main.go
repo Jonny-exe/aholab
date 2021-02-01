@@ -36,7 +36,7 @@ func handleRequest() error {
 		Debug: false,
 	})
 
-	PORT := 8080
+	PORT := 5000
 	corsHandler := c.Handler(myRouter)
 	log.Println("Listening on port: ", PORT)
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(PORT), corsHandler))
