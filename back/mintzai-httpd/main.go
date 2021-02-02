@@ -33,6 +33,14 @@ func handleRequest() error {
 	PORT := 8080
 	// corsHandler := c.Handler(myRouter)
 	handler := cors.Default().Handler(mux)
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"https://aholab.ehu.eus/users/aitor"},
+		AllowCredentials: true,
+		// Enable Debugging for testing, consider disabling in production
+		Debug: true,
+	})
+	handler = c.Handler(handler)
+
 	log.Println("Listening on port: ", PORT)
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(PORT), handler))
 
