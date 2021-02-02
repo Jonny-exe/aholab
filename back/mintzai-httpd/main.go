@@ -12,12 +12,12 @@ import (
 func handleRequest() error {
 	// myRouter := mux.NewRouter().StrictSlash(true)
 	// myRouter := http.NewServeMux()
-	// myRouter.HandleFunc("/InsertUserInfo", handlers.InsertUserInfo).Methods("POST", "OPTIONS")
-	// myRouter.HandleFunc("/GetAudioFileAmount", handlers.GetAudioFileAmount).Methods("GET", "OPTIONS")
 	// acceptedOrigins := "https://aholab.ehu.eus/users/aitor"
 	// log.Println(acceptedOrigins)
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", handlers.Test)
+	mux.HandleFunc("/InsertUserInfo", handlers.InsertUserInfo)
+	mux.HandleFunc("/GetAudioFileAmount", handlers.GetAudioFileAmount)
 	// c := cors.New(cors.Options{
 	// 	//AllowedOrigins:   []string{acceptedOrigins},
 	// 	AllowedOrigins:   []string{"*"},
@@ -35,7 +35,8 @@ func handleRequest() error {
 	handler := cors.Default().Handler(mux)
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},
-		AllowCredentials: true,
+		AllowCredentials: false,
+		AllowedHeaders:   []string{"*"},
 		// Enable Debugging for testing, consider disabling in production
 		Debug: true,
 	})
