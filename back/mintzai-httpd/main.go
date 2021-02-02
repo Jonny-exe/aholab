@@ -11,18 +11,12 @@ import (
 )
 
 func handleRequest() error {
-	// err := sql.Register("mysql", &MySQLDriver{})
-	// if err != nil {
-	// 	log.Println("Error: Could NOT connect to database.")
-	// 	log.Println(err)
-	// 	return err
-	// }
-
-	myRouter := mux.NewRouter().StrictSlash(true)
+	// myRouter := mux.NewRouter().StrictSlash(true)
+	myRouter := mux.NewRouter()
 	myRouter.HandleFunc("/InsertUserInfo", handlers.InsertUserInfo).Methods("POST", "OPTIONS")
 	myRouter.HandleFunc("/GetAudioFileAmount", handlers.GetAudioFileAmount).Methods("GET", "OPTIONS")
 	myRouter.HandleFunc("/", handlers.Test).Methods("GET", "OPTIONS")
-    acceptedOrigins := "https://aholab.ehu.eus/users/aitor"
+	acceptedOrigins := "https://aholab.ehu.eus/users/aitor"
 	log.Println(acceptedOrigins)
 	c := cors.New(cors.Options{
 		//AllowedOrigins:   []string{acceptedOrigins},
