@@ -22,12 +22,11 @@ func handleRequest() error {
 	myRouter.HandleFunc("/InsertUserInfo", handlers.InsertUserInfo).Methods("POST", "OPTIONS")
 	myRouter.HandleFunc("/GetAudioFileAmount", handlers.GetAudioFileAmount).Methods("GET", "OPTIONS")
 	myRouter.HandleFunc("/", handlers.Test).Methods("GET", "OPTIONS")
-    //acceptedOrigins := os.Getenv("AHOLAB_ACCEPTED_ORIGINS")
-    acceptedOrigins := "https://aholab.ehu.eus"
+    acceptedOrigins := "https://aholab.ehu.eus/users/aitor"
 	log.Println(acceptedOrigins)
 	c := cors.New(cors.Options{
-		//AllowedOrigins:   []string{acceptedOrigins},
-		AllowedOrigins:   []string{"*"},
+		AllowedOrigins:   []string{acceptedOrigins},
+		//AllowedOrigins:   []string{"*"},
 		AllowCredentials: false,
 		AllowedMethods:   []string{"POST", "GET", "OPTIONS"},
 		AllowedHeaders:   []string{"*"},
