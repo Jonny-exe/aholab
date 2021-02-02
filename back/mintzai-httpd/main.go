@@ -34,7 +34,7 @@ func handleRequest() error {
 	// corsHandler := c.Handler(myRouter)
 	handler := cors.Default().Handler(mux)
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"https://aholab.ehu.eus/users/aitor"},
+		AllowedOrigins:   []string{"*"},
 		AllowCredentials: true,
 		// Enable Debugging for testing, consider disabling in production
 		Debug: true,
