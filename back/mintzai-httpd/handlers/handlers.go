@@ -42,6 +42,7 @@ func InsertUserInfo(w http.ResponseWriter, r *http.Request) {
 
 func writeToFile(values []string) {
 	filePath := os.Getenv("AHOLAB_CSV_FILE_PATH")
+	log.Println("Aholab csv file path: ", filePath)
 	_, err := os.Stat(filePath)
 	if err != nil {
 		os.Create(filePath)
@@ -74,7 +75,8 @@ func writeToFile(values []string) {
 // GetAudioFileAmount ..
 func GetAudioFileAmount(w http.ResponseWriter, r *http.Request) {
 	fileIndex := 0
-	audioFilesDir := os.Getenv("AHOLAB_AUDIO_FILES_DIR")
+	audioFilesDir := os.Getenv("AHOLAB_AUDIO_FILES")
+	log.Println("audioFilesDir: ", audioFilesDir)
 	for {
 		fileName := strconv.Itoa(fileIndex)
 		_, err := os.Stat(audioFilesDir + fileName + ".wav")
