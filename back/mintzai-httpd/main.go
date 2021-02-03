@@ -15,9 +15,9 @@ func handleRequest() error {
 	// acceptedOrigins := "https://aholab.ehu.eus/users/aitor"
 	// log.Println(acceptedOrigins)
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", handlers.Test)
-	mux.HandleFunc("/InsertUserInfo", handlers.InsertUserInfo)
-	mux.HandleFunc("/GetAudioFileAmount", handlers.GetAudioFileAmount)
+	mux.HandleFunc("/users/aitor/server/", handlers.Test)
+	mux.HandleFunc("/users/aitor/server/InsertUserInfo", handlers.InsertUserInfo)
+	mux.HandleFunc("/users/aitor/server/GetAudioFileAmount", handlers.GetAudioFileAmount)
 	// c := cors.New(cors.Options{
 	// 	//AllowedOrigins:   []string{acceptedOrigins},
 	// 	AllowedOrigins:   []string{"*"},
