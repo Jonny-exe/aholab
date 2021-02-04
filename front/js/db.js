@@ -4,11 +4,9 @@ console.log(url)
 
 export const getAudioFileAmount = async () => {
     try {
-
         const response = await fetch(url + "GetAudioFileAmount", {
-            method: 'GET'
-        })
-
+		//headers: ["origin", "https://aholab.ehu.eus/users/aitor"]
+	})
         const json = await response.json()
         return json
     }
@@ -33,3 +31,4 @@ export const insertUserInfo = async (userInfo) => {
         return 500
     }
 }
+

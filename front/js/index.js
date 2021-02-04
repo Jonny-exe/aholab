@@ -4,7 +4,6 @@ let wavesurfer
 let audioFilesAmount
 const questions = que.q
 let userInfo = {}
-let finalValue
 const $ = (item) => {
     return document.querySelector(item)
 }
@@ -50,13 +49,11 @@ const createQuestions = () => {
     const question = questions[fileIndex - 1]
     let finalHTML = `<p class="questionText"> ${question["text"]} ${fileIndex} / ${audioFilesAmount} </p>`
     let innerHTML = ""
-    let i = 0
     for (let answer in question) {
         console.log("answer", answer)
         if (answer == "text") continue
         innerHTML +=
-            `<div class="radioButtonWrapper">  <input type="radio" class="question" checked="checked" value="${i}" name="radio"> <p class="questionParagraph">${question[answer]["text"]}</p><span class="checkmark"></span></div>`
-        i++
+            `<div class="radioButtonWrapper">  <input type="radio" class="question" checked="checked" value="${question[answer]["value"]}" name="radio"> <p class="questionParagraph">${question[answer]["text"]}</p><span class="checkmark"></span></div>`
     }
     finalHTML = finalHTML + innerHTML
     $("#questionsWrapper").innerHTML = finalHTML
@@ -81,8 +78,7 @@ const nextQuestion = () => {
     }
 
     addAnswerToUserInfo()
-
-    if (fileIndex >= audioFilesAmount - 1) {
+    if (fileIndex >= audioFilesAmount) {
         showSendPage()
         return
     }
@@ -112,6 +108,7 @@ const getAnswer = () => {
             break
         }
     }
+	console.log(value)
     return value
 }
 
