@@ -3,34 +3,23 @@ package main
 import (
 	"log"
 	"net/http"
-	"strconv"
+	"os"
 
 	"github.com/Jonny-exe/aholab/back/mintzai-httpd/handlers"
 	"github.com/rs/cors"
 )
 
 func handleRequest() error {
-	// myRouter := mux.NewRouter().StrictSlash(true)
-	// myRouter := http.NewServeMux()
-	// acceptedOrigins := "https://aholab.ehu.eus/users/aitor"
-	// log.Println(acceptedOrigins)
 	mux := http.NewServeMux()
 	mux.HandleFunc("/users/aitor/server/", handlers.Test)
 	mux.HandleFunc("/users/aitor/server/InsertUserInfo", handlers.InsertUserInfo)
 	mux.HandleFunc("/users/aitor/server/GetAudioFileAmount", handlers.GetAudioFileAmount)
-	// c := cors.New(cors.Options{
-	// 	//AllowedOrigins:   []string{acceptedOrigins},
-	// 	AllowedOrigins:   []string{"*"},
-	// 	AllowCredentials: false,
-	// 	AllowedMethods:   []string{"POST", "GET", "OPTIONS"},
-	// 	AllowedHeaders:   []string{"*"},
 
-	// 	// Enable Debugging for testing, consider disabling in production
-	// 	// To debug turn this to true
-	// 	Debug: true,
-	// })
+	PORT := os.Getenv("AHOLAB_SERVER_PORT")
 
-	PORT := 8080
+	if PORT == "" {
+		PORT = "8080"
+	}
 	// corsHandler := c.Handler(myRouter)
 	handler := cors.Default().Handler(mux)
 	c := cors.New(cors.Options{
@@ -43,7 +32,7 @@ func handleRequest() error {
 	handler = c.Handler(handler)
 
 	log.Println("Listening on port: ", PORT)
-	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(PORT), handler))
+	log.Fatal(http.ListenAndServe(":"+PORT, handler))
 
 	return nil
 }
