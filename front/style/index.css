@@ -8,15 +8,19 @@ i {
 	margin-bottom: 1%;
 }
 
+select {
+	margin: 1%;
+}
+
 
 input {
 	margin: 1%;
 	width: 30%;
 }
 
-input[type="radio"] {
+/* input[type="radio"] {
 	width: auto;
-}
+} */
 
 #waveformWrapper {
 	padding: 1%;
@@ -56,12 +60,15 @@ button.nextInput {
 	text-align: center;
 }
 
-#explicationWrapper {
+/* #explicationWrapper {
 	background-color: var(--primaryColor);
 	color: white;
 	padding: 1%;
 	margin: 1%;
 	border-radius: 5px;
+} */
+#explicationWrapper {
+	margin: 1%;
 }
 
 /* Safari */
@@ -109,6 +116,16 @@ button.nextInput {
 	align-items: center;
 }
 
+.questionWrapper {
+	margin: 1%;
+	font-size: 120%;
+}
+
+.sendInfo {
+	font-size: 120%;
+	margin: 1%;
+}
+
 .questionText {
 	background-color: var(--primaryColor);
 	color: white;
@@ -144,33 +161,25 @@ button.nextInput {
 	--optionSize: 15px;
 } */
 
-.radioButtonWrapper {
+/* .radioButtonWrapper {
 	margin: 1%;
 	display: flex;
 	justify-content: space-between;
-}
+} */
 
 p {
 	word-wrap: break-word;
 }
 
 #loginWrapper {
+	font-size: 120%;
 	margin: 1%;
 	text-align: left;
 }
 
 #alertWrapper {
-	background-color: red;
-	color: white;
-	padding: 1%;
 	margin-top: 1%;
-	border-radius: 5px;
-	transition-duration: 0.5s;
-	transform: scaleY(1)
-}
-
-.alert {
-	display: inherit !important;
+	margin-bottom: 1%;
 }
 
 .alert.hide {

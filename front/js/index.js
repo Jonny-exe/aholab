@@ -47,13 +47,22 @@ const renderQuestion = () => {
 
 const createQuestions = () => {
     const question = questions[fileIndex - 1]
-    let finalHTML = `<p class="questionText"> ${question["text"]} ${fileIndex} / ${audioFilesAmount} </p>`
+    // let finalHTML = `<p class="questionText"> ${question["text"]} ${fileIndex} / ${audioFilesAmount} </p>`
+
+    let finalHTML = `<div id="explicationWrapper" class="alert alert-primary" role="alert"> ${question["text"]} ${fileIndex} / ${audioFilesAmount} </div>`
     let innerHTML = ""
     for (let answer in question) {
         console.log("answer", answer)
         if (answer == "text") continue
+        // innerHTML +=
+        //     `<div class="radioButtonWrapper form-check">  <input type="radio" class="question form-check-input" checked="checked" value="${question[answer]["value"]}" name="radio"> <label class="questionParagraph form-check-label" for="flexRadioDefault1">${question[answer]["text"]}</label><span class="checkmark"></span></div>`
         innerHTML +=
-            `<div class="radioButtonWrapper">  <input type="radio" class="question" checked="checked" value="${question[answer]["value"]}" name="radio"> <p class="questionParagraph">${question[answer]["text"]}</p><span class="checkmark"></span></div>`
+            `<div class="form-check questionWrapper">
+    <input class="form-check-input" checked="checked" type="radio" value="${question[answer]["value"]}" name="flexRadioDefault" id="flexRadioDefault1">
+    <label class="form-check-label" for="flexRadioDefault1">
+        Default radio
+    </label>
+</div>`
     }
     finalHTML = finalHTML + innerHTML
     $("#questionsWrapper").innerHTML = finalHTML
@@ -108,7 +117,7 @@ const getAnswer = () => {
             break
         }
     }
-	console.log(value)
+    console.log(value)
     return value
 }
 
