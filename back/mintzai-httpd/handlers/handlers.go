@@ -85,7 +85,7 @@ func InsertUserInfo(w http.ResponseWriter, r *http.Request) {
 
 	var values []string
 	for i := 0; i < len(rest); i++ {
-		if rest[i] == "-1" {
+		if rest[i] != "-1" {
 			values = append(values, req.Data[rest[i]])
 		} else {
 			values = append(values, "undefined")
