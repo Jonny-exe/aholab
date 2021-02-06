@@ -61,19 +61,21 @@ func InsertUserInfo(w http.ResponseWriter, r *http.Request) {
 	var answerResult []string
 	log.Println("Datatype: ", datatype)
 	secondIndex := 0
-	for i := 0; i < len(datatype); i++ {
-		// log.Println("Answewr", answers[secondIndex][6:])
-		log.Println(answers[secondIndex][6:])
-		answer, _ := strconv.ParseFloat(answers[secondIndex][6:], 64)
-		log.Println("Answer: ", answer, "Data -1 : ", (datatype[i] - 1/10))
-		areEqual := checkEqual(answer, (datatype[i] - 0.1))
-		log.Println(areEqual)
-		if areEqual {
-			log.Println("SAME")
-			answerResult = append(answerResult, answers[i])
-			secondIndex++
-		} else {
-			answerResult = append(answerResult, "-1")
+	if len(answers) > 0 {
+		for i := 0; i < len(datatype); i++ {
+			// log.Println("Answewr", answers[secondIndex][6:])
+			log.Println(answers[secondIndex][6:])
+			answer, _ := strconv.ParseFloat(answers[secondIndex][6:], 64)
+			log.Println("Answer: ", answer, "Data -1 : ", (datatype[i] - 1/10))
+			areEqual := checkEqual(answer, (datatype[i] - 0.1))
+			log.Println(areEqual)
+			if areEqual {
+				log.Println("SAME")
+				answerResult = append(answerResult, answers[i])
+				secondIndex++
+			} else {
+				answerResult = append(answerResult, "-1")
+			}
 		}
 	}
 

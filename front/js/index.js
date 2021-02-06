@@ -128,6 +128,11 @@ const getAnswer = (questionIndex) => {
             value = answer.value
             break
         }
+
+    }
+    console.log("Value: ", value)
+    if (value === undefined) {
+        value = "Not answered"
     }
     return value
 }
