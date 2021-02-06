@@ -1,4 +1,5 @@
 import * as env from './env.js'
+import * as gettype from './gettype.js'
 const url = `${env.AHOLAB_SERVER_URL}`
 console.log(url)
 
@@ -15,8 +16,12 @@ export const getAudioFileAmount = async () => {
     }
 }
 
-export const insertUserInfo = async (userInfo) => {
-    const body = userInfo
+export const insertUserInfo = async (userInfo, fileAmount) => {
+    const datatype = gettype.getType(fileAmount)
+    const body = {
+        Data: userInfo,
+        Type: datatype
+    }
     try {
 
         const options = {

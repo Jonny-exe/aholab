@@ -14,10 +14,10 @@ const renderQuestion = () => {
     $("#playButton").classList.remove("waiting")
 
     const showQuestions = () => {
-        createQuestions()
+        const questionCount = createQuestions()
         $("div.questions").classList.remove("hide")
         $("#nextButton").classList.remove("waiting")
-        $("#nextButton").addEventListener("click", nextQuestion)
+        $("#nextButton").addEventListener("click", () => nextQuestion(questionCount))
         $("#playButton").classList.add("hide")
     }
 
@@ -46,26 +46,32 @@ const renderQuestion = () => {
 }
 
 const createQuestions = () => {
-    const question = questions[fileIndex - 1]
-    // let finalHTML = `<p class="questionText"> ${question["text"]} ${fileIndex} / ${audioFilesAmount} </p>`
+    const question = questions[fileIndex - 1][`audio${fileIndex - 1}`]
 
-    let finalHTML = `<div id="explicationWrapper" class="alert alert-primary" role="alert"> ${question["text"]} ${fileIndex} / ${audioFilesAmount} </div>`
     let innerHTML = ""
-    for (let answer in question) {
-        console.log("answer", answer)
-        if (answer == "text") continue
-        // innerHTML +=
-        //     `<div class="radioButtonWrapper form-check">  <input type="radio" class="question form-check-input" checked="checked" value="${question[answer]["value"]}" name="radio"> <label class="questionParagraph form-check-label" for="flexRadioDefault1">${question[answer]["text"]}</label><span class="checkmark"></span></div>`
-        innerHTML +=
-            `<div class="form-check questionWrapper">
-    <input class="form-check-input" checked="checked" type="radio" value="${question[answer]["value"]}" name="flexRadioDefault" id="flexRadioDefault1">
-    <label class="form-check-label" for="flexRadioDefault1">
-        Default radio
-    </label>
-</div>`
+    let questionIndex = 0
+    for (let audio in question) {
+        for (let answer in question[audio]) {
+
+            console.log("answer", answer)
+            if (answer == "text") {
+                innerHTML += `<div id="explicationWrapper" class="alert alert-primary" role="alert"> ${question[audio]["text"]} ${fileIndex} / ${audioFilesAmount} </div>`
+                continue
+            }
+            // innerHTML +=
+            //     `<div class="radioButtonWrapper form-check">  <input type="radio" class="question form-check-input" checked="checked" value="${question[answer]["value"]}" name="radio"> <label class="questionParagraph form-check-label" for="flexRadioDefault1">${question[answer]["text"]}</label><span class="checkmark"></span></div>`
+            innerHTML +=
+                `<div class="form-check questionWrapper">
+                    <input class="form-check-input" checked="checked" type="radio" value="${question[audio][answer]["value"]}" name="flexRadioDefault${questionIndex}" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                    ${question[audio][answer]["text"]}
+                    </label>
+                </div>`
+        }
+        questionIndex++
     }
-    finalHTML = finalHTML + innerHTML
-    $("#questionsWrapper").innerHTML = finalHTML
+    $("#questionsWrapper").innerHTML = innerHTML
+    return questionIndex
 }
 const start = () => {
     $("#explicationWrapper").classList.add("hide")
@@ -75,15 +81,20 @@ const start = () => {
     renderQuestion()
 }
 
-const nextQuestion = () => {
+const nextQuestion = (questionCount) => {
+    console.log(questionCount)
     const changeClasses = () => {
         $("div.questions").classList.add("hide")
         $("#nextButton").classList.add("waiting")
         $("#playButton").classList.remove("hide")
     }
     const addAnswerToUserInfo = () => {
-        const answer = getAnswer()
-        userInfo[`answer${fileIndex}`] = answer
+        for (let i = 0; i < questionCount; i++) {
+            const answer = getAnswer(i)
+            console.log("Answer : ", answer)
+            userInfo[`answer${fileIndex}.${i}`] = answer
+            console.log(userInfo)
+        }
     }
 
     addAnswerToUserInfo()
@@ -99,7 +110,7 @@ const nextQuestion = () => {
 const showSendPage = () => {
     $("#sendButton").addEventListener("click", async (event) => {
         event.preventDefault()
-        await db.insertUserInfo(userInfo)
+        await db.insertUserInfo(userInfo, audioFilesAmount)
         $("div.sendInfo").classList.add("hide")
         $("#finalDiv").classList.remove("hide")
     })
@@ -107,8 +118,9 @@ const showSendPage = () => {
     $("#test").classList.add("hide")
 }
 
-const getAnswer = () => {
-    const answers = document.querySelectorAll("input.question")
+const getAnswer = (questionIndex) => {
+    const answers = document.querySelectorAll(`input[name="flexRadioDefault${questionIndex}"]`)
+    console.log(answers)
     let value
     for (let answerIndex in answers) {
         const answer = answers[answerIndex]
@@ -117,7 +129,6 @@ const getAnswer = () => {
             break
         }
     }
-    console.log(value)
     return value
 }
 

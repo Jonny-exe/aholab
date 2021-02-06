@@ -16,6 +16,7 @@ func handleRequest() error {
 	mux.HandleFunc("/users/aitor/server/GetAudioFileAmount", handlers.GetAudioFileAmount)
 
 	PORT := os.Getenv("AHOLAB_SERVER_PORT")
+	log.Println(PORT)
 
 	if PORT == "" {
 		PORT = "8080"
