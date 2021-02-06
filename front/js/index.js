@@ -62,7 +62,7 @@ const createQuestions = () => {
             //     `<div class="radioButtonWrapper form-check">  <input type="radio" class="question form-check-input" checked="checked" value="${question[answer]["value"]}" name="radio"> <label class="questionParagraph form-check-label" for="flexRadioDefault1">${question[answer]["text"]}</label><span class="checkmark"></span></div>`
             innerHTML +=
                 `<div class="form-check questionWrapper">
-                    <input class="form-check-input" checked="checked" type="radio" value="${question[audio][answer]["value"]}" name="flexRadioDefault${questionIndex}" id="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" value="${question[audio][answer]["value"]}" name="flexRadioDefault${questionIndex}" id="flexRadioDefault1">
                     <label class="form-check-label" for="flexRadioDefault1">
                     ${question[audio][answer]["text"]}
                     </label>
