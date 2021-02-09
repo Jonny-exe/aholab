@@ -3,6 +3,7 @@ import * as db from './db.js'
 let wavesurfer
 let audioFilesAmount
 const questions = que.q
+let questionCount
 let userInfo = {}
 const $ = (item) => {
     return document.querySelector(item)
@@ -14,10 +15,11 @@ const renderQuestion = () => {
     $("#playButton").classList.remove("waiting")
 
     const showQuestions = () => {
-        const questionCount = createQuestions()
+        questionCount = createQuestions()
         $("div.questions").classList.remove("hide")
         $("#nextButton").classList.remove("waiting")
-        $("#nextButton").addEventListener("click", () => nextQuestion(questionCount))
+	    debugger
+        $("#nextButton").addEventListener("click", nextQuestion)
         $("#playButton").classList.add("hide")
     }
 
@@ -58,8 +60,7 @@ const createQuestions = () => {
                 innerHTML += `<div id="explicationWrapper" class="alert alert-primary" role="alert"> ${question[audio]["text"]} ${fileIndex} / ${audioFilesAmount} </div>`
                 continue
             }
-            // innerHTML +=
-            //     `<div class="radioButtonWrapper form-check">  <input type="radio" class="question form-check-input" checked="checked" value="${question[answer]["value"]}" name="radio"> <label class="questionParagraph form-check-label" for="flexRadioDefault1">${question[answer]["text"]}</label><span class="checkmark"></span></div>`
+
             innerHTML +=
                 `<div class="form-check questionWrapper">
                     <input class="form-check-input" type="radio" value="${question[audio][answer]["value"]}" name="flexRadioDefault${questionIndex}" id="flexRadioDefault1">
@@ -81,8 +82,9 @@ const start = () => {
     renderQuestion()
 }
 
-const nextQuestion = (questionCount) => {
+const nextQuestion = () => {
     console.log(questionCount)
+    $("#nextButton").removeEventListener("click",nextQuestion)
     const changeClasses = () => {
         $("div.questions").classList.add("hide")
         $("#nextButton").classList.add("waiting")
