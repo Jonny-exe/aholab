@@ -40,6 +40,8 @@ func InsertUserInfo(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	sort.Strings(rest)
+	column_names := rest
+
 	log.Println("Rest: ", rest, "Asnwers: ", answers)
 	for i := 0; i < len(answers); i++ {
 		for n := 0; n < (len(answers) - i - 1); n++ {
@@ -56,6 +58,9 @@ func InsertUserInfo(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log.Println("Ordered answers: ", answers)
+	for i := 0; i < len(answers); i++ {
+		column_names = append(column_names, answers[i])
+	}
 
 	datatype := req.Type
 	var answerResult []string
@@ -96,7 +101,7 @@ func InsertUserInfo(w http.ResponseWriter, r *http.Request) {
 	log.Println(values)
 
 	log.Println(rest)
-	writeToFile(values)
+	writeToFile(values, column_names)
 	json.NewDecoder(r.Body).Decode(&rest)
 
 	// v := reflect.ValueOf(req)
@@ -115,7 +120,7 @@ func checkEqual(a, b float64) bool {
 	return math.Abs(a-b) <= float64EqualityThreshold
 }
 
-func writeToFile(values []string) {
+func writeToFile(values []string, types []string) {
 	filePath := os.Getenv("AHOLAB_CSV_FILE_PATH")
 	log.Println("Aholab csv file path: ", filePath)
 	_, err := os.Stat(filePath)

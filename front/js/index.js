@@ -50,14 +50,14 @@ const renderQuestion = () => {
 const createQuestions = () => {
     const question = questions[fileIndex - 1][`audio${fileIndex - 1}`]
 
-    let innerHTML = ""
+    let innerHTML = `<div class="alert alert-primary pageCounter" id="explicationWrapper"  role="alert"> ${fileIndex} / ${audioFilesAmount}</div>`
     let questionIndex = 0
     for (let audio in question) {
         for (let answer in question[audio]) {
 
             console.log("answer", answer)
             if (answer == "text") {
-                innerHTML += `<div id="explicationWrapper" class="alert alert-primary" role="alert"> ${question[audio]["text"]} ${fileIndex} / ${audioFilesAmount} </div>`
+                innerHTML += `<div id="explicationWrapper" class="alert alert-primary" role="alert"> ${question[audio]["text"]}</div>`
                 continue
             }
 
