@@ -10,6 +10,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"time"
 )
 
 // Test ..
@@ -61,6 +62,7 @@ func InsertUserInfo(w http.ResponseWriter, r *http.Request) {
 	for i := 0; i < len(answers); i++ {
 		column_names = append(column_names, answers[i])
 	}
+	column_names = append(column_names, "date")
 
 	datatype := req.Type
 	var answerResult []string
@@ -98,6 +100,9 @@ func InsertUserInfo(w http.ResponseWriter, r *http.Request) {
 			values = append(values, "undefined")
 		}
 	}
+	dt := time.Now()
+	time := dt.Format("01-02-2006 15:04:05")
+	values = append(values, time)
 	log.Println(values)
 
 	log.Println(rest)
