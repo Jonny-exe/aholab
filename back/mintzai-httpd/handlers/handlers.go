@@ -137,8 +137,8 @@ func writeToFile(values []string, types []string) {
 	var records [][]string
 	if fileSize.Size() == 0 {
 		log.Println("File empty")
-		columnNames := []string{"name", "experience", "equip", "answer1", "answer2"}
-		records = append(records, columnNames)
+		// columnNames := []string{"name", "experience", "equip", "answer1", "answer2"}
+		records = append(records, types)
 	}
 	records = append(records, values)
 
