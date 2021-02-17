@@ -23,11 +23,20 @@ const renderQuestion = () => {
         $("#playButton").classList.add("hide")
     }
 
+    const jump = (e) => {
+        console.log("JUMP", e.keyCode)
+        if (e.keyCode == 74) {
+            document.removeEventListener("keydown", jump, false)
+            wavesurfer.stop()
+            showQuestions()
+        }
+    }
+
     const play = () => {
         if (!loading) {
             $("#playButton").classList.add("waiting")
             wavesurfer.play()
-            // document.addEventListener("onkeydown", jump, false)
+            document.addEventListener("keydown", jump, false)
         }
     }
 
