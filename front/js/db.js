@@ -5,9 +5,16 @@ console.log(url)
 
 export const getAudioFileAmount = async () => {
     try {
-        const response = await fetch(url + "GetAudioFileAmount", {
-		//headers: ["origin", "https://aholab.ehu.eus/users/aitor"]
-	})
+        const body = {
+            Lang: env.LANGUAGE
+        }
+        
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(body)
+        }
+
+        const response = await fetch(url + "GetAudioFileAmount", options)
         const json = await response.json()
         return json
     }

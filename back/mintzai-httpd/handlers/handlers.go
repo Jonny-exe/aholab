@@ -161,7 +161,13 @@ func writeToFile(values []string, types []string, lang string) {
 // GetAudioFileAmount ..
 func GetAudioFileAmount(w http.ResponseWriter, r *http.Request) {
 	fileIndex := 0
-	audioFilesDir := os.Getenv("AHOLAB_AUDIO_FILES")
+	type reqtype struct {
+		Lang string `json:"lang"`
+	}
+	var req reqtype
+	json.NewDecoder(r.Body).Decode(&req)
+
+	audioFilesDir := os.Getenv("AHOLAB_AUDIO_FILES_" + req.Lang)
 	log.Println("audioFilesDir: ", audioFilesDir)
 	for {
 		fileName := strconv.Itoa(fileIndex)

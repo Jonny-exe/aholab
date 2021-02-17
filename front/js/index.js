@@ -27,6 +27,7 @@ const renderQuestion = () => {
         if (!loading) {
             $("#playButton").classList.add("waiting")
             wavesurfer.play()
+            // document.addEventListener("onkeydown", jump, false)
         }
     }
 
