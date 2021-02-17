@@ -1,5 +1,7 @@
 import * as que from './questions.js'
 import * as db from './db.js'
+import * as env from './env.js'
+
 let wavesurfer
 let audioFilesAmount
 const questions = que.q
@@ -18,7 +20,7 @@ const renderQuestion = () => {
         questionCount = createQuestions()
         $("div.questions").classList.remove("hide")
         $("#nextButton").classList.remove("waiting")
-	    debugger
+        debugger
         $("#nextButton").addEventListener("click", nextQuestion)
         $("#playButton").classList.add("hide")
     }
@@ -36,7 +38,9 @@ const renderQuestion = () => {
         if (!loading) {
             $("#playButton").classList.add("waiting")
             wavesurfer.play()
-            document.addEventListener("keydown", jump, false)
+            if (env.TESTING) {
+                document.addEventListener("keydown", jump, false)
+            }
         }
     }
 
@@ -94,7 +98,7 @@ const start = () => {
 
 const nextQuestion = () => {
     console.log(questionCount)
-    $("#nextButton").removeEventListener("click",nextQuestion)
+    $("#nextButton").removeEventListener("click", nextQuestion)
     const changeClasses = () => {
         $("div.questions").classList.add("hide")
         $("#nextButton").classList.add("waiting")
