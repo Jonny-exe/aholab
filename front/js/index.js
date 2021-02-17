@@ -38,7 +38,7 @@ const renderQuestion = () => {
         if (!loading) {
             $("#playButton").classList.add("waiting")
             wavesurfer.play()
-            if (env.TESTING) {
+            if (env.TESTING && env.TESTING != undefined && env.TESTING != null) {
                 document.addEventListener("keydown", jump, false)
             }
         }
