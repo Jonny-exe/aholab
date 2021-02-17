@@ -18,9 +18,11 @@ export const getAudioFileAmount = async () => {
 
 export const insertUserInfo = async (userInfo, fileAmount) => {
     const datatype = gettype.getType(fileAmount)
+    const lang = env.LANGUAGE;
     const body = {
         Data: userInfo,
-        Type: datatype
+        Type: datatype,
+        Lang: lang
     }
     try {
 

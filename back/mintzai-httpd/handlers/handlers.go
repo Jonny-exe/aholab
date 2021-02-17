@@ -24,6 +24,7 @@ func InsertUserInfo(w http.ResponseWriter, r *http.Request) {
 	type reqtype struct {
 		Type []float64         `json:"type"`
 		Data map[string]string `json:"data"`
+		Lang string            `json:"lang"`
 	}
 	var req reqtype
 	json.NewDecoder(r.Body).Decode(&req)
@@ -106,7 +107,7 @@ func InsertUserInfo(w http.ResponseWriter, r *http.Request) {
 	log.Println(values)
 
 	log.Println(rest)
-	writeToFile(values, column_names)
+	writeToFile(values, column_names, req.Lang)
 	json.NewDecoder(r.Body).Decode(&rest)
 
 	// v := reflect.ValueOf(req)
@@ -125,8 +126,8 @@ func checkEqual(a, b float64) bool {
 	return math.Abs(a-b) <= float64EqualityThreshold
 }
 
-func writeToFile(values []string, types []string) {
-	filePath := os.Getenv("AHOLAB_CSV_FILE_PATH")
+func writeToFile(values []string, types []string, lang string) {
+	filePath := os.Getenv("AHOLAB_CSV_FILE_PATH_" + lang)
 	log.Println("Aholab csv file path: ", filePath)
 	_, err := os.Stat(filePath)
 	if err != nil {
