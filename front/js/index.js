@@ -12,11 +12,17 @@ const $ = (item) => {
 }
 const renderQuestion = () => {
     let loading
+    let playCount = 0
     $("#nextButton").classList.remove("hide")
     $("#playButton").classList.remove("hide")
     $("#playButton").classList.remove("waiting")
 
     const showQuestions = () => {
+        if (playCount === 0) {
+            $("#playButton").classList.remove("waiting")
+            playCount++
+            return
+        }
         questionCount = createQuestions()
         $("div.questions").classList.remove("hide")
         $("#nextButton").classList.remove("waiting")
@@ -37,7 +43,7 @@ const renderQuestion = () => {
     const play = () => {
         if (!loading) {
             $("#playButton").classList.add("waiting")
-            wavesurfer.play()
+            wavesurfer.play(0)
             if (env.TESTING && env.TESTING != undefined && env.TESTING != null) {
                 document.addEventListener("keydown", jump, false)
             }
